@@ -67,8 +67,8 @@ export class DiceManager {
             tip = 10;
             description = 'One Pair! 🎯';
         } else {
-            tip = 5;
-            description = 'High Card 📜';
+            tip = 10;
+            description = 'No Pair! 🧐';
         }
         
         this.tipResult.innerHTML = `
