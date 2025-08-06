@@ -15,6 +15,7 @@ export class WheelManager {
             
             const rotation = segmentAngle * index;
             segment.style.transform = `rotate(${rotation}deg)`;
+            segment.style.clipPath = `polygon(50% 50%, 50% 0%, ${50 + Math.tan((segmentAngle * Math.PI) / 360) * 50}% 0%)`;
             
             // Create alternating colors
             const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
@@ -55,4 +56,3 @@ export class WheelManager {
         return users[selectedIndex];
     }
 }
-

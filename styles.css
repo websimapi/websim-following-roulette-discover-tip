@@ -62,21 +62,23 @@ header p {
 
 .wheel-segment {
     position: absolute;
-    width: 50%;
-    height: 50%;
-    transform-origin: 100% 100%;
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 50%;
     overflow: hidden;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    padding-top: 20px;
 }
 
 .wheel-segment img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 3px solid white;
     object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .wheel-pointer {
