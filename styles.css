@@ -51,13 +51,31 @@ header p {
     gap: 20px;
 }
 
+.hovered-user {
+    position: absolute;
+    top: -110px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hovered-user img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    object-fit: cover;
+    background: #eee;
+}
+
 .wheel {
     width: 600px;
     height: 600px;
     border-radius: 50%;
     border: 8px solid #fff;
     position: relative;
-    transition: transform 3s cubic-bezier(0.23, 1, 0.32, 1);
     background: #fff;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
