@@ -61,7 +61,7 @@ export class DiceManager {
             tip = 30;
             description = 'Three of a Kind! 🎲';
         } else if (countValues[0] === 2 && countValues[1] === 2) {
-            tip = 10;
+            tip = 20;
             description = 'Two Pair! 👯';
         } else if (countValues[0] === 2) {
             tip = 10;
