@@ -33,6 +33,10 @@ export class WheelManager {
             this.wheel.appendChild(segment);
         });
 
+        // Set initial state
+        this.updateHoveredUser(users, this.currentRotation);
+        this.hoveredUserContainer.style.display = 'block';
+
         const transform = window.getComputedStyle(this.wheel).getPropertyValue('transform');
         if (transform && transform !== 'none') {
             const matrix = new DOMMatrix(transform);
@@ -57,9 +61,14 @@ export class WheelManager {
         if (user && this.hoveredUserPfp.alt !== user.username) {
             this.hoveredUserPfp.src = user.avatar_url || `https://images.websim.com/avatar/${user.username}`;
             this.hoveredUserPfp.alt = user.username;
+            this.hoveredUserContainer.style.display = 'block';
         }
     }
     
+    setSpinning(spinning) {
+        this.isSpinning = spinning;
+    }
+
     async spin(users) {
         if (this.isSpinning || users.length === 0) return null;
         
@@ -94,8 +103,7 @@ export class WheelManager {
                 if (progress < 1) {
                     requestAnimationFrame(animate);
                 } else {
-                    this.isSpinning = false;
-                    this.hoveredUserContainer.style.display = 'none';
+                    // Don't set isSpinning to false here, wait for iframe close
                     
                     const segmentAngle = 360 / users.length;
                     const normalizedRotation = this.currentRotation % 360;

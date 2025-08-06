@@ -51,6 +51,7 @@ class FollowingRoulette {
             
             console.log(`Loaded ${this.followingUsers.length} users`);
             this.wheelManager.createWheel(this.followingUsers);
+            this.wheelManager.updateHoveredUser(this.followingUsers, 0); // Show initial user
             
             this.rollBtn.disabled = false;
             this.rollBtn.innerHTML = '<span>🎲 Roll & Spin!</span>';
@@ -67,6 +68,7 @@ class FollowingRoulette {
         
         this.rollBtn.disabled = true;
         this.rollBtn.innerHTML = '<span>Rolling...</span>';
+        this.wheelManager.setSpinning(true);
         
         try {
             // Step 1: Roll dice first
@@ -127,6 +129,8 @@ class FollowingRoulette {
         this.projectIframe.src = '';
         this.selectedUser = null;
         this.suggestedTip = 0;
+        this.wheelManager.setSpinning(false); // Let wheel manager know spinning is over
+        this.wheelManager.updateHoveredUser(this.followingUsers, this.wheelManager.currentRotation);
     }
     
     resetRollButton() {
