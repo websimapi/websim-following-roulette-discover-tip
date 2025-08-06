@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Following Roulette - Discover & Tip</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Following Roulette</h1>
+            <p>Spin the wheel to discover projects from people you follow!</p>
+        </header>
+
+        <div class="game-area" id="gameArea">
+            <div class="wheel-container">
+                <div class="wheel" id="wheel"></div>
+                <div class="wheel-pointer"></div>
+                <button class="spin-btn" id="spinBtn" disabled>
+                    <span>Loading...</span>
+                </button>
+            </div>
+
+            <div class="dice-container">
+                <h3>Roll for Tip Amount</h3>
+                <div class="dice-area" id="diceArea">
+                    <div class="die" data-value="1">⚀</div>
+                    <div class="die" data-value="2">⚁</div>
+                    <div class="die" data-value="3">⚂</div>
+                    <div class="die" data-value="4">⚃</div>
+                    <div class="die" data-value="5">⚄</div>
+                </div>
+                <button class="roll-btn" id="rollBtn">Roll Dice</button>
+                <div class="tip-result" id="tipResult"></div>
+            </div>
+        </div>
+
+        <div class="project-iframe-container" id="iframeContainer" style="display: none;">
+            <div class="iframe-header">
+                <div class="tip-notice" id="tipNotice"></div>
+                <button class="close-btn" id="closeBtn">✕</button>
+            </div>
+            <iframe id="projectIframe" src="" frameborder="0"></iframe>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading your following list...</p>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
