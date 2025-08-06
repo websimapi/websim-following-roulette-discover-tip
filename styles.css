@@ -9,6 +9,7 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     color: white;
+    overflow: hidden; /* Prevent scrollbar from appearing */
 }
 
 .container {
@@ -16,6 +17,11 @@ body {
     margin: 0 auto;
     padding: 20px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 40px); /* Adjust for padding */
 }
 
 header {
@@ -39,6 +45,7 @@ header p {
 
 .game-area {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 20px;
