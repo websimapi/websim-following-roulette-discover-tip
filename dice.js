@@ -5,9 +5,10 @@ export class DiceManager {
         this.dice = Array.from(this.diceArea.querySelectorAll('.die'));
     }
     
-    roll() {
+    roll(callback) {
         // Roll 5 dice
         const values = [];
+        let completedDice = 0;
         
         this.dice.forEach((die, index) => {
             die.classList.add('rolling');
@@ -15,6 +16,7 @@ export class DiceManager {
             setTimeout(() => {
                 const value = Math.floor(Math.random() * 6) + 1;
                 values[index] = value;
+                completedDice++;
                 
                 const faces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
                 die.textContent = faces[value - 1];
@@ -23,13 +25,14 @@ export class DiceManager {
                 die.classList.remove('rolling');
                 
                 // When all dice are done rolling
-                if (values.length === 5 && values.every(v => v !== undefined)) {
-                    this.calculateTip(values);
+                if (completedDice === 5) {
+                    const tipAmount = this.calculateTip(values);
+                    if (callback) {
+                        callback(tipAmount);
+                    }
                 }
             }, 1000);
         });
-        
-        return 0; // Will be updated by calculateTip
     }
     
     calculateTip(values) {
@@ -76,4 +79,3 @@ export class DiceManager {
         return tip;
     }
 }
-

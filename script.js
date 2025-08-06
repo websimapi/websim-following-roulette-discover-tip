@@ -18,7 +18,6 @@ class FollowingRoulette {
     }
     
     initializeElements() {
-        this.spinBtn = document.getElementById('spinBtn');
         this.rollBtn = document.getElementById('rollBtn');
         this.closeBtn = document.getElementById('closeBtn');
         this.iframeContainer = document.getElementById('iframeContainer');
@@ -29,8 +28,7 @@ class FollowingRoulette {
     }
     
     attachEventListeners() {
-        this.spinBtn.addEventListener('click', () => this.spinWheel());
-        this.rollBtn.addEventListener('click', () => this.rollDice());
+        this.rollBtn.addEventListener('click', () => this.startGame());
         this.closeBtn.addEventListener('click', () => this.closeIframe());
         
         // Close iframe when clicking outside
@@ -54,8 +52,8 @@ class FollowingRoulette {
             console.log(`Loaded ${this.followingUsers.length} users`);
             this.wheelManager.createWheel(this.followingUsers);
             
-            this.spinBtn.disabled = false;
-            this.spinBtn.innerHTML = '<span>🎰 Spin the Wheel!</span>';
+            this.rollBtn.disabled = false;
+            this.rollBtn.innerHTML = '<span>🎲 Roll & Spin!</span>';
             
             this.hideLoading();
         } catch (error) {
@@ -64,39 +62,47 @@ class FollowingRoulette {
         }
     }
     
-    async spinWheel() {
+    async startGame() {
         if (this.followingUsers.length === 0) return;
         
-        this.spinBtn.disabled = true;
-        this.spinBtn.innerHTML = '<span>Spinning...</span>';
+        this.rollBtn.disabled = true;
+        this.rollBtn.innerHTML = '<span>Rolling...</span>';
         
         try {
+            // Step 1: Roll dice first
+            this.suggestedTip = await this.rollDice();
+            
+            // Step 2: Then spin wheel
+            this.rollBtn.innerHTML = '<span>Spinning...</span>';
             this.selectedUser = await this.wheelManager.spin(this.followingUsers);
             console.log('Selected user:', this.selectedUser);
             
-            // Get the user's most recent project
+            // Step 3: Get the user's most recent project
             const project = await this.apiManager.getUserMostRecentProject(this.selectedUser.username);
             
             if (!project) {
                 this.showError(`${this.selectedUser.username} doesn't have any public projects yet.`);
-                this.resetSpinButton();
+                this.resetRollButton();
                 return;
             }
             
-            // Load project in iframe
+            // Step 4: Load project in iframe with tip info
             this.loadProject(project);
             
         } catch (error) {
-            console.error('Error spinning wheel:', error);
+            console.error('Error in game:', error);
             this.showError('Something went wrong. Please try again.');
         }
         
-        this.resetSpinButton();
+        this.resetRollButton();
     }
     
-    rollDice() {
-        this.suggestedTip = this.diceManager.roll();
-        this.updateTipNotice();
+    async rollDice() {
+        return new Promise((resolve) => {
+            this.diceManager.roll((tipAmount) => {
+                resolve(tipAmount);
+            });
+        });
     }
     
     loadProject(project) {
@@ -123,9 +129,9 @@ class FollowingRoulette {
         this.suggestedTip = 0;
     }
     
-    resetSpinButton() {
-        this.spinBtn.disabled = false;
-        this.spinBtn.innerHTML = '<span>🎰 Spin Again!</span>';
+    resetRollButton() {
+        this.rollBtn.disabled = false;
+        this.rollBtn.innerHTML = '<span>🎲 Roll & Spin Again!</span>';
     }
     
     hideLoading() {
@@ -150,4 +156,3 @@ class FollowingRoulette {
 document.addEventListener('DOMContentLoaded', () => {
     new FollowingRoulette();
 });
-
