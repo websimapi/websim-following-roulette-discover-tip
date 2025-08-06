@@ -11,21 +11,19 @@
         <header>
             <h1>Following Roulette</h1>
             <p>Spin the wheel to discover projects from people you follow!</p>
-            <div class="dice-container">
-                <h3>Roll for Tip & Spin Wheel</h3>
-                <div class="dice-area" id="diceArea">
-                    <div class="die" data-value="1">⚀</div>
-                    <div class="die" data-value="2">⚁</div>
-                    <div class="die" data-value="3">⚂</div>
-                    <div class="die" data-value="4">⚃</div>
-                    <div class="die" data-value="5">⚄</div>
-                </div>
-                <button class="roll-btn" id="rollBtn" disabled>
-                    <span>Loading...</span>
-                </button>
-                <div class="tip-result" id="tipResult"></div>
-            </div>
         </header>
+
+        <div class="dice-container" id="diceContainer">
+            <h3>Roll for a Tip!</h3>
+            <div class="dice-area" id="diceArea">
+                <div class="die" data-value="1">⚀</div>
+                <div class="die" data-value="2">⚁</div>
+                <div class="die" data-value="3">⚂</div>
+                <div class="die" data-value="4">⚃</div>
+                <div class="die" data-value="5">⚄</div>
+            </div>
+            <div class="tip-result" id="tipResult"></div>
+        </div>
 
         <main class="game-area" id="gameArea">
             <div class="wheel-container">
@@ -34,6 +32,11 @@
                 </div>
                 <div class="wheel" id="wheel"></div>
                 <div class="wheel-pointer"></div>
+            </div>
+            <div class="spin-button-container">
+                <button class="roll-btn" id="rollBtn" disabled>
+                    <span>Loading...</span>
+                </button>
             </div>
         </main>
 

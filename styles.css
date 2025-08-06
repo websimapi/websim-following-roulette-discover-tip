@@ -15,6 +15,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    position: relative;
 }
 
 header {
@@ -114,6 +115,11 @@ header p {
     z-index: 10;
 }
 
+.spin-button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
 .spin-btn {
     padding: 15px 30px;
     font-size: 1.2rem;
@@ -139,39 +145,43 @@ header p {
 }
 
 .dice-container {
-    background: rgba(0,0,0,0.1);
-    padding: 20px;
-    border-radius: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 15px;
     text-align: center;
-    max-width: 500px;
-    margin: 0 auto;
+    width: 220px;
+    z-index: 50;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .dice-container h3 {
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
 }
 
 .dice-area {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
 }
 
 .die {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     background: white;
     color: #333;
-    border-radius: 10px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     transition: transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .die.rolling {
@@ -186,34 +196,41 @@ header p {
 }
 
 .roll-btn {
-    padding: 12px 24px;
-    font-size: 1rem;
+    padding: 15px 35px;
+    font-size: 1.2rem;
     font-weight: bold;
     background: linear-gradient(45deg, #5f27cd, #341f97);
     color: white;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(95, 39, 205, 0.4);
 }
 
-.roll-btn:hover {
+.roll-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(95, 39, 205, 0.6);
 }
 
+.roll-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .tip-result {
-    margin-top: 15px;
+    margin-top: 10px;
     padding: 8px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
     border-radius: 10px;
     font-weight: bold;
-    min-height: 38px;
+    min-height: 54px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
+    transition: background 0.3s;
 }
 
 .project-iframe-container {
