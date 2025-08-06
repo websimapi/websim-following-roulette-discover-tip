@@ -68,7 +68,6 @@ class FollowingRoulette {
         
         this.rollBtn.disabled = true;
         this.rollBtn.innerHTML = '<span>Rolling...</span>';
-        this.wheelManager.setSpinning(true);
         
         try {
             // Step 1: Roll dice first
@@ -77,6 +76,12 @@ class FollowingRoulette {
             // Step 2: Then spin wheel
             this.rollBtn.innerHTML = '<span>Spinning...</span>';
             this.selectedUser = await this.wheelManager.spin(this.followingUsers);
+            
+            // If the wheel didn't spin (e.g., already spinning), stop here.
+            if (!this.selectedUser) {
+                return;
+            }
+
             console.log('Selected user:', this.selectedUser);
             
             // Step 3: Get the user's most recent project
@@ -84,7 +89,7 @@ class FollowingRoulette {
             
             if (!project) {
                 this.showError(`${this.selectedUser.username} doesn't have any public projects yet.`);
-                this.resetRollButton();
+                this.closeIframe(); // Reset state
                 return;
             }
             
@@ -94,9 +99,8 @@ class FollowingRoulette {
         } catch (error) {
             console.error('Error in game:', error);
             this.showError('Something went wrong. Please try again.');
+            this.closeIframe(); // Reset state on error
         }
-        
-        this.resetRollButton();
     }
     
     async rollDice() {
@@ -131,6 +135,7 @@ class FollowingRoulette {
         this.suggestedTip = 0;
         this.wheelManager.setSpinning(false); // Let wheel manager know spinning is over
         this.wheelManager.updateHoveredUser(this.followingUsers, this.wheelManager.currentRotation);
+        this.resetRollButton();
     }
     
     resetRollButton() {
